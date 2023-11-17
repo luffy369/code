@@ -1,0 +1,43 @@
+#include<iostream>
+
+using namespace std;
+
+int main()
+{
+int k=0,l=0,m=0,n=0,o=0;
+char s[20];
+cout<<"Enter the string to check vowels"<<endl;
+cin>>s;
+for(int i=0;i<20;i++)
+{
+if(s[i]=='a' || s[i]=='A')
+{
+k++;
+}
+else if(s[i]=='e' || s[i]=='E')
+{
+l++;
+}
+else if(s[i]=='i' || s[i]=='I')
+{
+m++;
+}
+
+else if(s[i]=='o' || s[i]=='O')
+{
+n++;
+}
+else if(s[i]=='u' || s[i]=='U')
+{
+o++;
+}
+}
+cout<<"The vowel count is: "<<endl;
+cout<<"The 'a' vowel count is: "<<k<<endl;
+cout<<"The 'e' vowel count is: "<<l<<endl;
+cout<<"The 'i' vowel count is: "<<m<<endl;
+cout<<"The 'o' vowel count is: "<<n<<endl;
+cout<<"The 'u' vowel count is: "<<o<<endl;
+return 0;
+
+}

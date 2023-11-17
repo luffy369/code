@@ -1,0 +1,62 @@
+#include <iostream>
+
+using namespace std;
+
+int linearSearch(int arr[], int n, int key) 
+{
+for (int i = 0; i < n; i++) 
+{
+if (arr[i] == key) 
+{
+return i;
+}
+}
+return -1;
+}
+
+int sentinelSearch(int arr[], int n, int key) 
+{
+int last = arr[n - 1];
+arr[n - 1] = key;
+int i = 0;
+while (arr[i] != key) 
+{
+i++;
+}
+arr[n - 1] = last;
+if (i < n - 1 || arr[n - 1] == key) 
+{
+return i;
+} 
+else 
+{
+return -1; 
+}
+}
+int main() 
+{
+int arr[] = {12, 45, 67, 23, 56, 89, 34, 67, 90, 1};
+int n = sizeof(arr) / sizeof(arr[0]);
+int key;
+ cout << "Enter the element to search: ";
+ cin >> key;
+int linearResult = linearSearch(arr, n, key);
+int sentinelResult = sentinelSearch(arr, n, key);
+if (linearResult != -1) 
+{
+ cout << "Linear Search: Element found at index " << linearResult <<  endl;
+} 
+else 
+{
+ cout << "Linear Search: Element not found" <<  endl;
+}
+if (sentinelResult != -1) 
+{
+ cout << "Sentinel Search: Element found at index " << sentinelResult <<  endl;
+} 
+else 
+{
+ cout << "Sentinel Search: Element not found" <<  endl;
+}
+return 0;
+}

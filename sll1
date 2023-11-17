@@ -1,0 +1,110 @@
+#include <iostream>
+
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+class LinkedList {
+private:
+    Node* head;
+
+public:
+    LinkedList() {
+        head = nullptr;
+    }
+
+
+    void insertNode(int value) {
+        Node* newNode = new Node();
+        newNode->data = value;
+        newNode->next = nullptr;
+
+        if (head == nullptr) {
+            head = newNode;
+        } else {
+            Node* current = head;
+            while (current->next != nullptr) {
+                current = current->next;
+            }
+            current->next = newNode;
+        }
+    }
+
+
+    void deleteNode(int value) {
+        if (head == nullptr) {
+            return;
+        }
+
+        if (head->data == value) {
+            Node* temp = head;
+            head = head->next;
+            delete temp;
+            return;
+        }
+
+        Node* current = head;
+        while (current->next != nullptr && current->next->data != value) {
+            current = current->next;
+        }
+
+        if (current->next == nullptr) {
+            return;
+        }
+
+        Node* temp = current->next;
+        current->next = current->next->next;
+        delete temp;
+    }
+
+
+    bool search(int value) {
+        Node* current = head;
+        while (current != nullptr) {
+            if (current->data == value) {
+                return true; // Element found
+            }
+            current = current->next;
+        }
+        return false;
+    }
+
+
+    void display() {
+        Node* current = head;
+        while (current != nullptr) {
+            std::cout << current->data << " ";
+            current = current->next;
+        }
+        std::cout << std::endl;
+    }
+};
+
+int main() {
+    LinkedList myList;
+
+    myList.insertNode(1);
+    myList.insertNode(2);
+    myList.insertNode(3);
+    myList.insertNode(4);
+    myList.insertNode(5);
+
+    std::cout << "Original List: ";
+    myList.display();
+
+    int searchValue = 3;
+    if (myList.search(searchValue)) {
+        std::cout << searchValue << " found in the list." << std::endl;
+    } else {
+        std::cout << searchValue << " not found in the list." << std::endl;
+    }
+
+    int deleteValue = 2;
+    myList.deleteNode(deleteValue);
+    std::cout << "List after deleting " << deleteValue << ": ";
+    myList.display();
+
+    return 0;
+}

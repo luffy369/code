@@ -1,0 +1,85 @@
+#include <iostream>
+
+using namespace std;
+struct sllNode
+{
+    int data;
+    struct sllNode *next;
+};
+
+class slist{
+
+    sllNode *head;
+    public:
+     slist()
+     {
+         head=NULL;
+     }
+
+     void create()
+     {
+         int d;
+         cout<<"enter data for node";
+         cin>>d;
+         sllNode *curr = new sllNode;
+         curr->data=d;
+         curr->next=NULL;
+         if(head==NULL)
+         {
+             head=curr;
+         }
+         else
+         {
+             head->next=curr;
+         }
+     }
+     void delet()
+     {
+         sllNode *temp=head;
+          head=head->next;
+     }
+
+     void display()
+     {
+         sllNode *t =head;
+         while(t!=NULL)
+         {
+             cout<<" "<< t->data;
+             t = t->next;
+         }
+
+     }
+
+};
+int main()
+{
+    int ch;
+    char cont;
+    slist s1;
+do{
+ cout<<"\nSingly linked list creation ";
+ cout<<"\n1.Create sll";
+ cout<<"\n2.Display sll";
+ cout<<"\n3. Delete";
+ cout<<"\nenter choice: ";
+ cin>>ch;
+ switch(ch)
+ {
+     case 1:
+            s1.create();
+            break;
+     case 2:
+            s1.display();
+            break;
+            case 3:
+            s1.delet();
+            break;
+     default:
+            break;
+
+ }
+ cout<<"\ndo you want to continue Y/N";
+ cin>>cont;
+}while(cont=='y');
+return 0;
+}

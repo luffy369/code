@@ -1,0 +1,113 @@
+#include <iostream>
+#include <cstring>
+
+using namespace std;
+
+class STRING {
+public:
+    void frequency(char arr[]) {
+        int count = 0;
+        char ch;
+         cout << "Enter a character: ";
+         cin >> ch;
+
+        for (int i = 0; i < strlen(arr); i++) {
+            if (ch == arr[i]) {
+                count++;
+            }
+        }
+
+         cout << "The frequency of character " << ch << " is " << count <<  endl;
+    }
+
+    void deletel(char arr[]) {
+        int j, k;
+         cout << "Enter values for j and k: ";
+         cin >> j >> k;
+
+        for (int i = j - 1; i < strlen(arr); i++) {
+            arr[i] = arr[i + 1];
+        }
+
+        for (int i = k - 2; i < strlen(arr); i++) {
+            arr[i] = arr[i + 1];
+        }
+
+         cout << "The edited string is: " << arr <<  endl;
+    }
+
+    void chardel(char arr[]) {
+        int position;
+         cout << "Enter a position to delete: ";
+         cin >> position;
+
+        char arr1[100];  // Assuming a maximum length of 100 for the new string
+        int len = strlen(arr);
+        int arr1_len = 0;
+
+        for (int i = 0; i < len; i++) {
+            if (arr[i] != arr[position]) {
+                arr1[arr1_len] = arr[i];
+                arr1_len++;
+            }
+        }
+
+        arr1[arr1_len] = '\0';
+
+         cout << "The edited string is: " << arr1 <<  endl;
+    }
+
+    void palindrome(char arr[]) {
+        int count = strlen(arr);
+        int a = count / 2;
+
+        int i;
+        for (i = 0; i < a; i++) {
+            int j = count - 1 - i;
+            if (arr[i] != arr[j]) {
+                 cout << "It is not a palindrome" <<  endl;
+                break;
+            }
+        }
+
+        if (i == a) {
+             cout << "It is a palindrome" <<  endl;
+        }
+    }
+};
+
+int main() {
+    char ch[100];  // Assuming a maximum length of 100 for the input string
+    int choice;
+
+     cout << "Enter a string: ";
+     cin >> ch;
+
+     cout << "Choose an operation:" <<  endl;
+     cout << "1. Frequency" <<  endl;
+     cout << "2. Delete" <<  endl;
+     cout << "3. Character Delete" <<  endl;
+     cout << "4. Palindrome" <<  endl;
+     cin >> choice;
+
+    STRING obj;
+
+    switch (choice) {
+        case 1:
+            obj.frequency(ch);
+            break;
+        case 2:
+            obj.deletel(ch);
+            break;
+        case 3:
+            obj.chardel(ch);
+            break;
+        case 4:
+            obj.palindrome(ch);
+            break;
+        default:
+             cout << "Invalid Input" <<  endl;
+    }
+
+    return 0;
+}

@@ -1,0 +1,36 @@
+#include<iostream>
+using namespace std;
+class ge_pass
+{
+    public:
+    char a[6];
+    int i,j,k,l;
+    void password()
+    {
+        cout<<"enter the elements of password :";
+        for(i=0;i<6;i++)
+        {
+            cin>>a[i];
+        }
+        for(i=0;i<6;i++)
+        {
+            for(j=0;j<6;j++)
+            {
+                for(j=0;j<6;j++)
+                {
+                    for(l=0;l<6;l++)
+                    {
+                        cout<<a[i]<<a[j]<<a[k]<<a[l]<<"\t";
+                    }
+                }
+            }
+        }
+    }
+};
+int main()
+{
+    ge_pass p;
+    p.password();
+    
+    return 0;
+}

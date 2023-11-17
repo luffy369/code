@@ -1,0 +1,102 @@
+#include <iostream>
+
+using namespace std;
+
+const int MAX_SIZE = 10; 
+
+void transposeMatrix(int mat[][MAX_SIZE], int transp[][MAX_SIZE], int rows, int cols) {
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            transp[j][i] = mat[i][j];
+        }
+    }
+}
+
+bool isSquareMatrix(int rows, int cols) {
+    return rows == cols;
+}
+
+bool isUpperTriangular(int mat[][MAX_SIZE], int rows, int cols) {
+    for (int i = 1; i < rows; i++) {
+        for (int j = 0; j < i; j++) {
+            if (mat[i][j] != 0) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+void findSaddlePoint(int mat[][MAX_SIZE], int rows, int cols) {
+    for (int i = 0; i < rows; i++) {
+        int minVal = mat[i][0];
+        int colIndex = 0;
+        bool saddlePointFound = true;
+
+        for (int j = 0; j < cols; j++) {
+            if (mat[i][j] < minVal) {
+                minVal = mat[i][j];
+                colIndex = j;
+            }
+        }
+
+        for (int k = 0; k < rows; k++) {
+            if (mat[k][colIndex] > minVal) {
+                saddlePointFound = false;
+                break;
+            }
+        }
+
+        if (saddlePointFound) {
+            cout << "Saddle point found at: (" << i << ", " << colIndex << ") with value " << minVal << endl;
+            return;
+        }
+    }
+    cout << "No saddle point found in the matrix." << endl;
+}
+
+int main() {
+    int mat[MAX_SIZE][MAX_SIZE];
+    int transp[MAX_SIZE][MAX_SIZE];
+    int rows, cols;
+
+    cout << "Enter the number of rows and columns for the matrix: ";
+    cin >> rows >> cols;
+
+    if (rows > MAX_SIZE || cols > MAX_SIZE) {
+        cout << "Matrix size exceeds the maximum size of " << MAX_SIZE << "x" << MAX_SIZE << endl;
+        return 1;
+    }
+
+    cout << "Enter the matrix elements:" << endl;
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            cin >> mat[i][j];
+        }
+    }
+
+    cout << "Transpose of the matrix:" << endl;
+    transposeMatrix(mat, transp, rows, cols);
+    for (int i = 0; i < cols; i++) {
+        for (int j = 0; j < rows; j++) {
+            cout << transp[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+    if (isSquareMatrix(rows, cols)) {
+        cout << "The matrix is a square matrix." << endl;
+    } else {
+        cout << "The matrix is not a square matrix." << endl;
+    }
+
+    if (isUpperTriangular(mat, rows, cols)) {
+        cout << "The matrix is an upper triangular matrix." << endl;
+    } else {
+        cout << "The matrix is not an upper triangular matrix." << endl;
+    }
+
+    findSaddlePoint(mat, rows, cols);
+
+    return 0;
+}

@@ -1,114 +1,110 @@
-#include <iostream>
-#include <vector>
-
+#include<iostream>
 using namespace std;
-
-class Matrix {
-public:
-    vector<vector<int>> data;
-
-    Matrix(int rows, int cols) {
-        data.resize(rows, vector<int>(cols));
-    }
-
-    void inputMatrix() {
-        cout << "Enter the matrix elements:" << endl;
-        for (int i = 0; i < data.size(); i++) {
-            for (int j = 0; j < data[i].size(); j++) {
-                cin >> data[i][j];
+class A
+{
+    public:
+    int rows,columns;
+    int arr1[10][10],arr2[10][10],sum[10][10],sub[10][10],mul[10][10];
+    void get()
+    {
+        cout<<"Enter the no. of rows:"<<endl;
+        cin>>rows;
+        cout<<"Enter the no. of columns:"<<endl;
+        cin>>columns;
+        for(int i=0;i<rows;i++)
+        {
+            for(int j=0;j<columns;j++)
+            {
+                cout<<"Enter the element ["<<i+1<<"]["<<j+1<<"] of matrix 1:"<<endl;
+                cin>>arr1[i][j];      
             }
+                
+        }
+        for(int i=0;i<rows;i++)
+        {
+            for(int j=0;j<columns;j++)
+            {
+                cout<<"Enter the element ["<<i+1<<"]["<<j+1<<"] of matrix 2:"<<endl;
+                cin>>arr2[i][j];      
+            }
+                
+        }
+
+
+    }
+    void add_matrix()
+    {
+        for(int i=0;i<rows;i++)
+        {
+            for(int j=0;j<columns;j++)
+            {
+                sum[i][j]=arr1[i][j]+arr2[i][j];
+            }
+                
+        }
+        cout<<"The Addition is:"<<endl;
+        for(int i=0;i<rows;i++)
+        {
+            for(int j=0;j<columns;j++)
+            {
+                cout<<"The element ["<<i+1<<"]["<<j+1<<"] is:"<<sum[i][j]<<endl;
+            }
+                
         }
     }
-
-    void displayMatrix() {
-        for (int i = 0; i < data.size(); i++) {
-            for (int j = 0; j < data[i].size(); j++) {
-                cout << data[i][j] << " ";
+    void sub_matrix()
+    {
+        for(int i=0;i<rows;i++)
+        {
+            for(int j=0;j<columns;j++)
+            {
+                sub[i][j]=arr1[i][j]-arr2[i][j];
             }
-            cout << endl;
+                
+        }
+        cout<<"The Subtraction is:"<<endl;
+        for(int i=0;i<rows;i++)
+        {
+            for(int j=0;j<columns;j++)
+            {
+                cout<<"The element ["<<i+1<<"]["<<j+1<<"] is:"<<sub[i][j]<<endl;
+            }
+                
         }
     }
+    void mul_matrix()
+    {
+        for(int i=0;i<rows;i++)
+        {
+            for(int j=0;j<columns;j++)
+            {
+                mul[i][j]=0;
+                for(int k=0;k<columns;k++)
+                {
+                    mul[i][j]+=arr1[i][k]*arr2[k][j];
+                }
+            }
+                
+        }
+        cout<<"The multiplication is:"<<endl;
+        for(int i=0;i<rows;i++)
+        {
+            for(int j=0;j<columns;j++)
+            {
+                cout<<"The element ["<<i+1<<"]["<<j+1<<"] is:"<<mul[i][j]<<endl;
+            }
+                
+        }
+
+    }
+
 };
-
-Matrix addMatrix(const Matrix& A, const Matrix& B) {
-    int rows = A.data.size();
-    int cols = A.data[0].size();
-    Matrix result(rows, cols);
-
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            result.data[i][j] = A.data[i][j] + B.data[i][j];
-        }
-    }
-
-    return result;
-}
-
-Matrix subMatrix(const Matrix& A, const Matrix& B) {
-    int rows = A.data.size();
-    int cols = A.data[0].size();
-    Matrix result(rows, cols);
-
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            result.data[i][j] = A.data[i][j] - B.data[i][j];
-        }
-    }
-
-    return result;
-}
-
-Matrix multiplyMatrix(const Matrix& A, const Matrix& B) {
-    int rows_A = A.data.size();
-    int cols_A = A.data[0].size();
-    int cols_B = B.data[0].size();
-    Matrix result(rows_A, cols_B);
-
-    for (int i = 0; i < rows_A; i++) {
-        for (int j = 0; j < cols_B; j++) {
-            result.data[i][j] = 0;
-            for (int k = 0; k < cols_A; k++) {
-                result.data[i][j] += A.data[i][k] * B.data[k][j];
-            }
-        }
-    }
-
-    return result;
-}
-
-int main() {
-    int rows, cols;
-
-    cout << "Enter the number of rows and columns for matrices A and B: ";
-    cin >> rows >> cols;
-
-    Matrix A(rows, cols);
-    Matrix B(rows, cols);
-
-    cout << "Matrix A:" << endl;
-    A.inputMatrix();
-
-    cout << "Matrix B:" << endl;
-    B.inputMatrix();
-
-    cout << "Matrix A:" << endl;
-    A.displayMatrix();
-
-    cout << "Matrix B:" << endl;
-    B.displayMatrix();
-
-    Matrix additionResult = addMatrix(A, B);
-    Matrix subtractionResult = subMatrix(A, B);
-    Matrix multiplicationResult = multiplyMatrix(A, B);
-
-    cout << "Matrix A + B:" << endl;
-    additionResult.displayMatrix();
-
-    cout << "Matrix A - B:" << endl;
-    subtractionResult.displayMatrix();
-
-    cout << "Matrix A * B:" << endl;
-    multiplicationResult.displayMatrix();
-
+int main()
+{
+    A obj;
+    obj.get();
+    obj.add_matrix();
+    obj.sub_matrix();
+    obj.mul_matrix();
     return 0;
 }

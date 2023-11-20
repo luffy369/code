@@ -1,0 +1,48 @@
+#include <iostream>
+
+using namespace std;
+
+void printMatrixZigzag(int arr[][10], int m, int n) {
+  int i = 0, j = 0;
+  bool right = true;
+
+  while (i < m && j < n) {
+    cout << arr[i][j] << " ";
+
+    if (right) {
+      i++;
+      if (i == m) {
+        i--;
+        j++;
+        right = false;
+      }
+    } else {
+      j++;
+      if (j == n) {
+        i++;
+        j--;
+        right = true;
+      }
+    }
+  }
+}
+
+int main() {
+  int arr[10][10];
+  int m, n;
+
+  cout << "Enter the number of rows and columns of the matrix: ";
+  cin >> m >> n;
+
+  cout << "Enter the elements of the matrix: " << endl;
+  for (int i = 0; i < m; i++) {
+    for (int j = 0; j < n; j++) {
+      cin >> arr[i][j];
+    }
+  }
+
+  cout << "The matrix in zigzag manner is: " << endl;
+  printMatrixZigzag(arr, m, n);
+
+  return 0;
+}

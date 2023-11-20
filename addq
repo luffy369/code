@@ -1,0 +1,91 @@
+#include <iostream>
+
+using namespace std;
+
+class Queue {
+private:
+  int arr[10];
+  int front;
+  int rear;
+
+public:
+  Queue()
+  {
+    front = -1;
+    rear = -1;
+  }
+
+  void enqueue(int data)
+  {
+    if (rear == 9)
+    {
+      cout << "Queue is full" << endl;
+      return;
+    }
+
+    rear++;
+    arr[rear] = data;
+  }
+
+  int dequeue()
+  {
+    if (front == rear)
+        {
+          cout << "Queue is empty" << endl;
+          return -1;
+        }
+
+    front++;
+    int data = arr[front];
+    return data;
+  }
+
+  bool isEmpty() {
+    return front == rear;
+  }
+
+  int frontElement() {
+    if (isEmpty()) {
+      return -1;
+    }
+
+    return arr[front + 1];
+  }
+
+  void display() {
+    if (isEmpty()) {
+      cout << "Queue is empty" << endl;
+      return;
+    }
+
+    for (int i = front + 1; i <= rear; i++) {
+      cout << arr[i] << " ";
+    }
+
+    cout << endl;
+  }
+
+  int sum() {
+    int sum = 0;
+
+    for (int i = front + 1; i <= rear; i++) {
+      sum += arr[i];
+    }
+
+    return sum;
+  }
+};
+
+int main() {
+  Queue q; 
+
+  q.enqueue(10);
+  q.enqueue(20);
+  q.enqueue(30);
+  q.enqueue(40);
+  q.enqueue(50);
+
+  cout << "Sum of elements in the queue: " << q.sum() << endl;
+
+  return 0;
+}

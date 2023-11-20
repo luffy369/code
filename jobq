@@ -1,0 +1,96 @@
+#include <iostream>
+
+using namespace std;
+
+const int MAX = 5;
+
+class Job {
+public:
+  int id, priority;
+
+  void getdata() { cin >> id >> priority; }
+
+  void putdata() { cout << id << "\t\t" << priority << endl; }
+};
+
+class Queue {
+public:
+  int front, rear;
+  Job queue[MAX];
+
+  Queue() { front = rear = -1; }
+
+  bool isEmpty() { return front == rear + 1 || rear == -1; }
+
+  bool isFull() { return rear == MAX - 1; }
+
+  void insert() {
+    Job j;
+    j.getdata();
+
+    if (isFull()) {
+      cout << "Full Queue." << endl;
+      return;
+    }
+
+    if (rear == -1) {
+      front++;
+      rear++;
+      queue[rear] = j;
+    } else {
+      int i = rear;
+      while (i >= front && queue[i].priority > j.priority) {
+        queue[i + 1] = queue[i];
+        i--;
+      }
+      queue[i + 1] = j;
+      rear++;
+    }
+
+    cout << "Added Job." << endl;
+  }
+
+  void remove() {
+    if (isEmpty()) {
+      cout << "Empty Queue." << endl;
+    } else {
+      front++;
+      cout << "Processed Job." << endl;
+    }
+  }
+
+  void display() {
+    if (isEmpty()) {
+      cout << "Empty Queue." << endl;
+    } else {
+      for (int i = front; i <= rear; i++) {
+        queue[i].putdata();
+      }
+    }
+  }
+};
+
+int main() {
+  int ch;
+  Queue q;
+
+  do {
+    cout << "1.Insert\n2.Display\n3.Remove\n4.Exit\n";
+    cin >> ch;
+
+    switch (ch) {
+    case 1:
+      q.insert();
+      break;
+
+    case 2:
+      q.display();
+      break;
+
+    case 3:
+      q.remove();
+    }
+  } while (ch != 4);
+
+  return 0;
+}

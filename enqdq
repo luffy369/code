@@ -3,42 +3,29 @@
 
 using namespace std;
 
-class Queue {
-public:
-  void enqueue(int val) {
-    q.push(val);
-  }
-
-  int dequeue() {
-    if (q.empty()) {
-      cout << "Queue is empty. Cannot dequeue." << endl;
-      return -1;
-    }
-    int val = q.front();
-    q.pop();
-    return val;
-  }
-
-  bool isEmpty() {
-    return q.empty();
-  }
-
-private:
-  queue<int> q;
-};
-
-
 int main() {
-  Queue q;
-  q.enqueue(10);
-  q.enqueue(20);
-  q.enqueue(30);
+  queue<int> queue;
 
-  while (!q.isEmpty()) {
-    int element = q.dequeue();
-    cout << element << " ";
+  queue.push(10);
+  queue.push(20);
+  queue.push(30);
+
+  cout << "Queue elements: ";
+  while (!queue.empty()) {
+    cout << queue.front() << " ";
+    queue.pop();
   }
+  cout << endl;
 
+  int element = queue.front();
+  queue.pop();
+  cout << "Dequeued element: " << element << endl;
+
+  cout << "Queue elements: ";
+  while (!queue.empty()) {
+    cout << queue.front() << " ";
+    queue.pop();
+  }
   cout << endl;
 
   return 0;

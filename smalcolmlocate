@@ -1,0 +1,36 @@
+#include <iostream>
+
+using namespace std;
+
+int main() {
+  int m, n;
+  cout << "Enter the number of rows: ";
+  cin >> m;
+
+  cout << "Enter the number of columns: ";
+  cin >> n;
+
+  int arr[m][n];
+
+  cout << "Enter the elements of the array: ";
+  for (int i = 0; i < m; i++) {
+    for (int j = 0; j < n; j++) {
+      cin >> arr[i][j];
+    }
+  }
+
+  for (int j = 0; j < n; j++) {
+    int min = arr[0][j];
+    int min_row = 0;
+    for (int i = 1; i < m; i++) {
+      if (arr[i][j] < min) {
+        min = arr[i][j];
+        min_row = i;
+      }
+    }
+
+    cout << "The smallest element in column " << j << " is " << min << ", located at row " << min_row << endl;
+  }
+
+  return 0;
+}

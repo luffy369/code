@@ -1,0 +1,41 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+bool is_valid_email(string email) {
+  if (email.find('@') == string::npos) {
+    return false;
+  }
+
+  size_t dot_pos = email.find('.');
+  if (dot_pos == string::npos || dot_pos < email.find('@')) {
+    return false;
+  }
+  string domain_extension = email.substr(dot_pos + 1);
+  if (domain_extension.length() < 2) {
+    return false;
+  }
+
+  for (char c : domain_extension) {
+    if (!isalnum(c)) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+int main() {
+  string email;
+  cout << "Enter an email address: ";
+  cin >> email;
+
+  if (is_valid_email(email)) {
+    cout << "The email address is valid." << endl;
+  } else {
+    cout << "The email address is invalid." << endl;
+  }
+
+  return 0;
+}

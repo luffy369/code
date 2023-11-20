@@ -1,0 +1,42 @@
+#include <iostream>
+
+using namespace std;
+
+string toCamelCase(string str) {
+    bool makeUpper = false;
+    string camelCase = "";
+
+    for (char c : str) {
+        if (c == ' ' || c == '-' || c == '_') {
+            makeUpper = true;
+        } else {
+            if (makeUpper) {
+                if (c >= 'a' && c <= 'z') {
+                    camelCase += c - 'a' + 'A';
+                } else {
+                    camelCase += c;
+                }
+                makeUpper = false;
+            } else {
+                if (c >= 'A' && c <= 'Z') {
+                    camelCase += c - 'A' + 'a';
+                } else {
+                    camelCase += c;
+                }
+            }
+        }
+    }
+
+    return camelCase;
+}
+
+int main() {
+    string inputString;
+    cout << "Enter a string: ";
+    getline(cin, inputString);
+
+    string camelCaseString = toCamelCase(inputString);
+    cout << "String in Camel case: " << camelCaseString << endl;
+
+    return 0;
+}

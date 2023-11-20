@@ -1,0 +1,45 @@
+#include <iostream>
+#include <queue>
+
+using namespace std;
+
+class Queue {
+public:
+  void enqueue(int val) {
+    q.push(val);
+  }
+
+  int dequeue() {
+    if (q.empty()) {
+      cout << "Queue is empty. Cannot dequeue." << endl;
+      return -1;
+    }
+    int val = q.front();
+    q.pop();
+    return val;
+  }
+
+  bool isEmpty() {
+    return q.empty();
+  }
+
+private:
+  queue<int> q;
+};
+
+
+int main() {
+  Queue q;
+  q.enqueue(10);
+  q.enqueue(20);
+  q.enqueue(30);
+
+  while (!q.isEmpty()) {
+    int element = q.dequeue();
+    cout << element << " ";
+  }
+
+  cout << endl;
+
+  return 0;
+}

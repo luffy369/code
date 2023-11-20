@@ -1,0 +1,35 @@
+#include <iostream>
+
+using namespace std;
+
+int main() {
+  int m, n;
+  cout << "Enter the number of rows: ";
+  cin >> m;
+
+  cout << "Enter the number of columns: ";
+  cin >> n;
+
+  int arr[m][n];
+
+  for (int i = 0; i < m; i++) {
+    for (int j = 0; j < n; j++) {
+      cin >> arr[i][j];
+    }
+  }
+
+  int row_sum[m];
+  for (int i = 0; i < m; i++) {
+    row_sum[i] = 0;
+    for (int j = 0; j < n; j++) {
+      row_sum[i] += arr[i][j];
+    }
+  }
+
+  cout << "\nSum of each row:\n";
+  for (int i = 0; i < m; i++) {
+    cout << "Row " << i << ": " << row_sum[i] << endl;
+  }
+
+  return 0;
+}
